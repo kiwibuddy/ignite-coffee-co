@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Flame } from "@/components/brand/Flame";
 import { Logo } from "@/components/brand/Logo";
 import { PillButton } from "@/components/brand/PillButton";
 import { cn } from "@/lib/utils";
@@ -25,25 +26,20 @@ export function SiteNav() {
         )}
       >
         <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 md:h-20">
-          <button
-            type="button"
-            className="font-display text-xs uppercase tracking-brand md:hidden"
-            onClick={() => setOpen(true)}
-            aria-label="Open menu"
-          >
-            Menu
-          </button>
-          <Link
-            href="#menu"
-            className="hidden font-display text-xs uppercase tracking-brand md:inline"
-          >
-            Menu
-          </Link>
-          <Logo
-            variant="mark"
-            className="text-paper"
-            invert
-          />
+          <div className="flex items-center gap-2 font-display text-xs uppercase tracking-brand">
+            <Flame className="h-[1em] w-auto shrink-0 text-paper" aria-hidden />
+            <button
+              type="button"
+              className="md:hidden"
+              onClick={() => setOpen(true)}
+              aria-label="Open menu"
+            >
+              Menu
+            </button>
+            <Link href="#menu" className="hidden md:inline">
+              Menu
+            </Link>
+          </div>
           <PillButton asChild variant="dark" size="sm">
             <Link href="/app">Order ahead</Link>
           </PillButton>
