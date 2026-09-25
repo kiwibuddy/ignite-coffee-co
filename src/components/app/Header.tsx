@@ -19,7 +19,7 @@ export function Header({ onOpenPickup }: { onOpenPickup: () => void }) {
 
   return (
     <header className="shrink-0 bg-ember text-paper">
-      <div className="space-y-3 px-4 pb-3.5 pt-[max(0.875rem,env(safe-area-inset-top))]">
+      <div className="space-y-3 px-4 pb-3.5 pt-[calc(env(safe-area-inset-top)+1.5rem)]">
         <div className="flex items-center justify-between gap-3">
           <span className="inline-flex items-center gap-2">
             <Flame className="h-6 w-auto text-paper" />
