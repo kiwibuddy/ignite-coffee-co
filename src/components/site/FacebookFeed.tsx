@@ -59,9 +59,7 @@ export function FacebookFeed() {
               <button
                 type="button"
                 onClick={() => setActive(post)}
-                className={`w-full overflow-hidden rounded-[14px] text-left transition-transform hover:-translate-y-0.5 ${
-                  post.img ? "bg-paper text-char" : "bg-char text-paper"
-                }`}
+                className="w-full overflow-hidden rounded-[14px] bg-char text-left text-paper transition-transform hover:-translate-y-0.5"
               >
                 {post.img && (
                   <div className="relative aspect-[4/3]">

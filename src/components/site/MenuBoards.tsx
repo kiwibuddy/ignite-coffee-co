@@ -56,7 +56,7 @@ export function MenuBoards() {
                 <TabsTrigger
                   key={board.id}
                   value={board.id}
-                  className="data-[state=active]:bg-paper data-[state=active]:text-ember text-paper"
+                  className="text-paper data-[state=active]:bg-char data-[state=active]:text-paper"
                 >
                   {board.title}
                 </TabsTrigger>

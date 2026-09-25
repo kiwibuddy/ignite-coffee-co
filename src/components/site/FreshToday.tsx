@@ -25,7 +25,7 @@ export function FreshToday() {
           {items.map((item, i) =>
             item ? (
               <Reveal key={item.id} delay={0.05 * i}>
-                <article className="overflow-hidden rounded-[14px] bg-paper">
+                <article className="overflow-hidden rounded-[14px] bg-char text-paper">
                   <div className="relative aspect-square">
                     {item.img ? (
                       <Image
@@ -38,13 +38,13 @@ export function FreshToday() {
                     ) : null}
                   </div>
                   <div className="p-4">
-                    <h3 className="font-display text-sm uppercase tracking-brand text-char">
+                    <h3 className="font-display text-sm uppercase tracking-brand text-paper">
                       {item.name}
                     </h3>
-                    <p className="mt-1 font-mono text-xs text-ink-2">
+                    <p className="mt-1 font-mono text-xs text-paper/70">
                       {money(typeof item.p === "number" ? item.p : item.p[12])}
                     </p>
-                    <PillButton asChild size="sm" className="mt-4 w-full">
+                    <PillButton asChild variant="dark" size="sm" className="mt-4 w-full">
                       <Link href={`/app?item=${item.id}`}>Order</Link>
                     </PillButton>
                   </div>

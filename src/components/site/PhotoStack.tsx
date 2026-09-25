@@ -27,7 +27,7 @@ export function PhotoStack({ className }: { className?: string }) {
           return (
             <motion.div
               key={slide.src}
-              className="absolute inset-0 overflow-hidden rounded-[14px] border border-line bg-paper"
+              className="absolute inset-0 overflow-hidden rounded-[14px] border border-paper/15 bg-char"
               style={{ zIndex: 10 - offset }}
               animate={
                 reduce
