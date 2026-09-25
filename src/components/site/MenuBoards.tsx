@@ -2,14 +2,18 @@
 
 import { MENU } from "@/data/menu";
 import type { MenuCategoryId, MenuItem } from "@/data/menu";
-import { Letterboard } from "@/components/brand/Letterboard";
+import {
+  Letterboard,
+  type LetterboardSection,
+} from "@/components/brand/Letterboard";
 import { Eyebrow, Reveal } from "@/components/brand/Reveal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 type Board = {
   id: string;
   title: string;
-  items: MenuItem[];
+  items?: MenuItem[];
+  sections?: LetterboardSection[];
 };
 
 function itemsFor(...cats: MenuCategoryId[]) {
@@ -22,7 +26,11 @@ const BOARDS: Board[] = [
   {
     id: "specials",
     title: "Specials",
-    items: itemsFor("tea", "new", "fall"),
+    sections: [
+      { title: "Teas", items: itemsFor("tea") },
+      { title: "New", items: itemsFor("new") },
+      { title: "Fall", items: itemsFor("fall") },
+    ],
   },
   { id: "eats", title: "Eats", items: itemsFor("eats") },
 ];
@@ -39,12 +47,13 @@ export function MenuBoards() {
           </p>
         </Reveal>
 
-        <div className="mt-12 hidden gap-6 md:grid md:grid-cols-2">
+        <div className="mt-12 hidden gap-6 md:grid md:grid-cols-2 md:items-stretch">
           {BOARDS.map((board) => (
             <Letterboard
               key={board.id}
               title={board.title}
               items={board.items}
+              sections={board.sections}
             />
           ))}
         </div>
@@ -56,7 +65,7 @@ export function MenuBoards() {
                 <TabsTrigger
                   key={board.id}
                   value={board.id}
-                  className="text-paper data-[state=active]:bg-char data-[state=active]:text-paper"
+                  className="data-[state=active]:bg-paper data-[state=active]:text-ember text-paper"
                 >
                   {board.title}
                 </TabsTrigger>
@@ -64,7 +73,11 @@ export function MenuBoards() {
             </TabsList>
             {BOARDS.map((board) => (
               <TabsContent key={board.id} value={board.id}>
-                <Letterboard title={board.title} items={board.items} />
+                <Letterboard
+                  title={board.title}
+                  items={board.items}
+                  sections={board.sections}
+                />
               </TabsContent>
             ))}
           </Tabs>
