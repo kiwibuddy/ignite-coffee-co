@@ -1,11 +1,31 @@
 "use client";
 
-import { MENU, CATS } from "@/data/menu";
+import { MENU } from "@/data/menu";
+import type { MenuCategoryId, MenuItem } from "@/data/menu";
 import { Letterboard } from "@/components/brand/Letterboard";
 import { Eyebrow, Reveal } from "@/components/brand/Reveal";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const BOARD_CATS = CATS.filter(([id]) => id !== "beans");
+type Board = {
+  id: string;
+  title: string;
+  items: MenuItem[];
+};
+
+function itemsFor(...cats: MenuCategoryId[]) {
+  return cats.flatMap((cat) => MENU.filter((m) => m.cat === cat));
+}
+
+const BOARDS: Board[] = [
+  { id: "iced", title: "Iced", items: itemsFor("iced") },
+  { id: "coffee", title: "Coffee", items: itemsFor("coffee") },
+  {
+    id: "specials",
+    title: "Specials",
+    items: itemsFor("tea", "new", "fall"),
+  },
+  { id: "eats", title: "Eats", items: itemsFor("eats") },
+];
 
 export function MenuBoards() {
   return (
@@ -19,29 +39,32 @@ export function MenuBoards() {
           </p>
         </Reveal>
 
-        <div className="mt-12 hidden gap-6 md:grid md:grid-cols-3">
-          {BOARD_CATS.map(([id, label], i) => (
+        <div className="mt-12 hidden gap-6 md:grid md:grid-cols-2">
+          {BOARDS.map((board) => (
             <Letterboard
-              key={id}
-              title={label}
-              items={MENU.filter((m) => m.cat === id)}
-              className={i > 2 ? "md:col-span-1" : undefined}
+              key={board.id}
+              title={board.title}
+              items={board.items}
             />
           ))}
         </div>
 
         <div className="mt-10 md:hidden">
-          <Tabs defaultValue={BOARD_CATS[0][0]}>
+          <Tabs defaultValue={BOARDS[0].id}>
             <TabsList className="flex h-auto w-full flex-wrap justify-start gap-1 bg-transparent p-0">
-              {BOARD_CATS.map(([id, label]) => (
-                <TabsTrigger key={id} value={id} className="data-[state=active]:bg-paper data-[state=active]:text-ember text-paper">
-                  {label}
+              {BOARDS.map((board) => (
+                <TabsTrigger
+                  key={board.id}
+                  value={board.id}
+                  className="data-[state=active]:bg-paper data-[state=active]:text-ember text-paper"
+                >
+                  {board.title}
                 </TabsTrigger>
               ))}
             </TabsList>
-            {BOARD_CATS.map(([id, label]) => (
-              <TabsContent key={id} value={id}>
-                <Letterboard title={label} items={MENU.filter((m) => m.cat === id)} />
+            {BOARDS.map((board) => (
+              <TabsContent key={board.id} value={board.id}>
+                <Letterboard title={board.title} items={board.items} />
               </TabsContent>
             ))}
           </Tabs>

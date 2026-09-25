@@ -16,9 +16,6 @@ export function FreshToday() {
     <section id="fresh" className="bg-ember px-5 pb-20 md:pb-28">
       <div className="mx-auto max-w-[1200px]">
         <Reveal>
-          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-ember-tint px-3 py-1 font-mono text-[10px] uppercase tracking-wide text-ember-deep">
-            ● Synced from Facebook · {bakePost?.date ?? "Aug 29"}
-          </div>
           <Eyebrow className="text-paper">Fresh in the case</Eyebrow>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-paper/85">
             {bakePost?.text}
